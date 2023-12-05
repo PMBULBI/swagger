@@ -1,116 +1,361 @@
 openapi: 3.0.0
 info:
-  title: Har2Postman
+  title: PMB
   version: 1.0.0
 servers:
   - url: https://komarbe.ulbi.ac.id
   - url: http://127.0.0.1:5000
+components:
+  securitySchemes:
+    apikeyAuth:
+      type: http
+      scheme: apikey
+security:
+  - apikeyAuth: []
 paths:
-  /biodata/jalur:
+  /pendaftar/daftar:
     post:
       tags:
         - General
-      summary: POST /biodata/jalur successfully
+      summary: Post Pendaftaran
       requestBody:
-        content: {}
-      parameters:
-        - name: Content-Type
-          in: header
-          schema:
-            type: string
-          example: application/json
-        - name: LOGIN
-          in: header
-          schema:
-            type: string
-          example: >-
-            v4.public.eyJkYXRhIjp7ImlkX3BlbmRhZnRhciI6ODMsImlkX2Jpb2RhdGEiOiIiLCJwaG9uZV9udW1iZXIiOiIwODEyMjIyMTgxNDMiLCJlbWFpbCI6ImluZHJhYWphQHVsYmkuYWMuaWQiLCJmdWxsX25hbWUiOiJJbmRyYSBVeSJ9LCJleHAiOiIyMDIzLTExLTMwVDA5OjAyOjMyKzA3OjAwIiwiaWF0IjoiMjAyMy0xMS0zMFQwNzowMjozMiswNzowMCIsImlkIjoiMDgxMjIyMjE4MTQzIiwibmJmIjoiMjAyMy0xMS0zMFQwNzowMjozMiswNzowMCJ9gXlkGiU1PAZsSEc73jbH2o-CJpp14tpcMMlGEzEaPbLmpEAu2DPLULlSx5DqbEAPVSfSKzPYb17uFVk36qF4AQ
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_mhs: Indra Uy
+                asal_sekolah: ULBIH
+                email_mhs: indraaja@ulbi.ac.id
+                hp_mhs: '081222218143'
+                provinsi_sekolah: Jawa Barat
+                kota_sekolah: Bandung
+                tahun: 2024/2025
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /prodi/delete:
+  /pendaftar/decrypt:
+    post:
+      tags:
+        - General
+      summary: Post Pendaftaran Decrypted
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_mhs: Indra Uy
+                asal_sekolah: ULBIH
+                email_mhs: indraaja@ulbi.ac.id
+                hp_mhs: '081222218143'
+                provinsi_sekolah: Jawa Barat
+                kota_sekolah: Bandung
+                tahun: 2024/2025
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /pendaftar/login/email:
+    post:
+      tags:
+        - General
+      summary: Post LOGIN
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: rofinafiisr@gmail.com
+                password: WIQY3JIIXA
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /sekolah:
+    post:
+      tags:
+        - General
+      summary: Get Sekolah
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_sekolah: SMAN 24
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-provinsi/get:
+    get:
+      tags:
+        - General
+      summary: Get Provinsi
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-provinsi/getnama:
+    post:
+      tags:
+        - General
+      summary: Get Provinsi Nama
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_provinsi: Jawa
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-kota/get:
+    get:
+      tags:
+        - General
+      summary: Get Kota
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-kota/getidprov:
+    post:
+      tags:
+        - General
+      summary: Get Kota By Id Provinsi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_provinsi: '32'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-kota/getidprovnmkota:
+    post:
+      tags:
+        - General
+      summary: Get Kota By Id Provinsi & Nama Kota
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_provinsi: '32'
+                nama_kota: bandung
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-kecamatan/get:
+    get:
+      tags:
+        - General
+      summary: Get Kecamatan
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-kecamatan/getidkota:
+    post:
+      tags:
+        - General
+      summary: Get Kecamatan By Id Kota
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_kota: '1101'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-kecamatan/getidkotanmkecamatan:
+    post:
+      tags:
+        - General
+      summary: Get Kecamatan By Id Kota & Nama Kecamatan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_kota: '1101'
+                nama_kecamatan: Teupah
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-kelurahan/get:
+    get:
+      tags:
+        - General
+      summary: Get Kelurahan
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-kelurahan/getidkecamatan:
+    post:
+      tags:
+        - General
+      summary: Get Kelurahan By Id Kecamatan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_kecamatan: '1101010'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /wilayah-kelurahan/getidkecamatannmkelurahan:
+    post:
+      tags:
+        - General
+      summary: Get Kelurahan By Id Kecamatan & Nama Kelurahan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_kecamatan: '1101010'
+                nama_kelurahan: La
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /pendaftar/pendaftar/get:
+    get:
+      tags:
+        - General
+      summary: Get One Pendaftar
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '57'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /pendaftar/pendaftar:
+    get:
+      tags:
+        - General
+      summary: Get All Pendaftar
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin_level:
+    get:
+      tags:
+        - General
+      summary: Get All Admin Level
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin_level/get:
+    get:
+      tags:
+        - General
+      summary: Get One Admin Level
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '22'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin_level/post:
+    post:
+      tags:
+        - General
+      summary: Post Admin Level
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_level: 4
+                nama_level: Coba aja
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin_level/put:
+    put:
+      tags:
+        - General
+      summary: Put Admin Level
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_level: Coba ajahh!!
+      parameters:
+        - name: id_level
+          in: query
+          schema:
+            type: integer
+          example: '44'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin_level/delete:
     delete:
       tags:
         - General
-      summary: 'DELETE /prodi/delete '
+      summary: Del Admin Level
       parameters:
-        - name: id
-          in: query
-          schema:
-            type: integer
-          example: '90'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /prodi/put:
-    put:
-      tags:
-        - General
-      summary: 'PUT /prodi/put '
-      requestBody:
-        content: {}
-      parameters:
-        - name: id
-          in: query
-          schema:
-            type: integer
-          example: '90'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /prodi/post:
-    post:
-      tags:
-        - General
-      summary: 'POST /prodi/post '
-      requestBody:
-        content: {}
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /prodi/get:
-    get:
-      tags:
-        - General
-      summary: 'GET /prodi/get '
-      parameters:
-        - name: id
-          in: query
-          schema:
-            type: integer
-          example: '14'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /prodi:
-    get:
-      tags:
-        - General
-      summary: 'GET /prodi '
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /fakultas/put:
-    put:
-      tags:
-        - General
-      summary: 'PUT /fakultas/put '
-      requestBody:
-        content: {}
-      parameters:
-        - name: id
+        - name: id_level
           in: query
           schema:
             type: integer
@@ -120,39 +365,21 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /fakultas/delete:
-    delete:
-      tags:
-        - General
-      summary: 'DELETE /fakultas/delete '
-      parameters:
-        - name: id
-          in: query
-          schema:
-            type: integer
-          example: '4'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /fakultas/post:
-    post:
-      tags:
-        - General
-      summary: 'POST /fakultas/post '
-      requestBody:
-        content: {}
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /fakultas/get:
+  /admin:
     get:
       tags:
         - General
-      summary: 'GET /fakultas/get '
+      summary: Get All Admin
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/get:
+    get:
+      tags:
+        - General
+      summary: Get One Admin
       parameters:
         - name: id
           in: query
@@ -164,11 +391,115 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /fakultas:
+  /admin/post:
+    post:
+      tags:
+        - General
+      summary: Post Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_admin: Kiwkiw
+                username: kiwkiw123
+                email: Kiwkiw@gg.co
+                no_hp: '13123131231'
+                password: Kuykuy
+                aktif: 1
+                level: 1
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/put:
+    put:
+      tags:
+        - General
+      summary: Post Admin Copy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_admin: Kiwkiwss
+                username: kiwkiw123
+                email: Kiwkiw@gg.co
+                no_hp: '13123131231'
+                password: Kuykuysss
+                aktif: 1
+                level: 1
+      parameters:
+        - name: id_admin
+          in: query
+          schema:
+            type: integer
+          example: '8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/delete:
+    delete:
+      tags:
+        - General
+      summary: Del Admin
+      parameters:
+        - name: id_admin
+          in: query
+          schema:
+            type: integer
+          example: '8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jalur:
     get:
       tags:
         - General
-      summary: 'GET /fakultas '
+      summary: Get All Jalur
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jalur/get:
+    get:
+      tags:
+        - General
+      summary: Get One Jalur
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '4'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jalur/post:
+    post:
+      tags:
+        - General
+      summary: Post Jalur
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                jalur: Kiwkiw
+                nama_jalur: kiwkiw123
+                keterangan_jalur: Kiwkiwee
+                status: nonaktif
       responses:
         '200':
           description: Successful response
@@ -178,9 +509,16 @@ paths:
     put:
       tags:
         - General
-      summary: 'PUT /jalur/put '
+      summary: Post Jalur Copy
       requestBody:
-        content: {}
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_jalur: kiwkiw123xe
+                keterangan_jalur: Kiwkiwee
+                status: nonaktif
       parameters:
         - name: id
           in: query
@@ -196,7 +534,7 @@ paths:
     delete:
       tags:
         - General
-      summary: 'DELETE /jalur/delete '
+      summary: Delete Jalur
       parameters:
         - name: id
           in: query
@@ -208,95 +546,21 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /jalur/post:
-    post:
-      tags:
-        - General
-      summary: 'POST /jalur/post '
-      requestBody:
-        content: {}
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /jalur/get:
+  /fakultas:
     get:
       tags:
         - General
-      summary: 'GET /jalur/get '
-      parameters:
-        - name: id
-          in: query
-          schema:
-            type: integer
-          example: '4'
+      summary: Get All Fakultas
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /jalur:
+  /fakultas/get:
     get:
       tags:
         - General
-      summary: 'GET /jalur '
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /admin/delete:
-    delete:
-      tags:
-        - General
-      summary: 'DELETE /admin/delete '
-      parameters:
-        - name: id_admin
-          in: query
-          schema:
-            type: integer
-          example: '8'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /admin/put:
-    put:
-      tags:
-        - General
-      summary: 'PUT /admin/put '
-      requestBody:
-        content: {}
-      parameters:
-        - name: id_admin
-          in: query
-          schema:
-            type: integer
-          example: '8'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /admin/post:
-    post:
-      tags:
-        - General
-      summary: 'POST /admin/post '
-      requestBody:
-        content: {}
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /admin/get:
-    get:
-      tags:
-        - General
-      summary: 'GET /admin/get '
+      summary: Get One Fakultas
       parameters:
         - name: id
           in: query
@@ -308,23 +572,37 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /admin:
-    get:
+  /fakultas/post:
+    post:
       tags:
         - General
-      summary: 'GET /admin '
+      summary: Post Fakultas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_fakultas: tes atuh
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /admin_level/delete:
-    delete:
+  /fakultas/put:
+    put:
       tags:
         - General
-      summary: 'DELETE /admin_level/delete '
+      summary: Put Fakultas
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_fakultas: tes atuheee
       parameters:
-        - name: id_level
+        - name: id
           in: query
           schema:
             type: integer
@@ -334,187 +612,482 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /admin_level/put:
+  /fakultas/delete:
+    delete:
+      tags:
+        - General
+      summary: Del Fakultas
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '4'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /prodi:
+    get:
+      tags:
+        - General
+      summary: Get All Prodi
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /prodi/get:
+    get:
+      tags:
+        - General
+      summary: Get One Prodi
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '14'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /prodi/post:
+    post:
+      tags:
+        - General
+      summary: Post Prodi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                fakultas: 5
+                kode_program_studi: '90'
+                program_studi: tes prodi
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /prodi/put:
     put:
       tags:
         - General
-      summary: 'PUT /admin_level/put '
+      summary: Put Prodi
       requestBody:
-        content: {}
-      parameters:
-        - name: id_level
-          in: query
-          schema:
-            type: integer
-          example: '44'
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /admin_level/post:
-    post:
-      tags:
-        - General
-      summary: 'POST /admin_level/post '
-      requestBody:
-        content: {}
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /admin_level/get:
-    get:
-      tags:
-        - General
-      summary: 'GET /admin_level/get '
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                fakultas: 5
+                program_studi: tes prodizzz
       parameters:
         - name: id
           in: query
           schema:
             type: integer
-          example: '22'
+          example: '90'
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /admin_level:
-    get:
+  /prodi/delete:
+    delete:
       tags:
         - General
-      summary: 'GET /admin_level '
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /pendaftar/pendaftar:
-    get:
-      tags:
-        - General
-      summary: 'GET /pendaftar/pendaftar '
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /pendaftar/pendaftar/get:
-    get:
-      tags:
-        - General
-      summary: 'GET /pendaftar/pendaftar/get '
+      summary: Del Fakultas Copy
       parameters:
         - name: id
           in: query
           schema:
             type: integer
-          example: '57'
+          example: '90'
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /wilayah-kota/getidprovnmkota:
-    post:
-      tags:
-        - General
-      summary: 'POST /wilayah-kota/getidprovnmkota '
-      requestBody:
-        content: {}
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /wilayah-kota/getidprov:
-    post:
-      tags:
-        - General
-      summary: 'POST /wilayah-kota/getidprov '
-      requestBody:
-        content: {}
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /wilayah-kota/get:
+  /biodata/jalur/get:
     get:
       tags:
         - General
-      summary: 'GET /wilayah-kota/get '
+      summary: Get All Biodata Jalur
+      parameters:
+        - name: LOGIN
+          in: header
+          schema:
+            type: string
+          example: >-
+            v4.public.eyJleHAiOiIyMDIzLTEyLTAyVDE1OjIxOjIxKzA3OjAwIiwiaWF0IjoiMjAyMy0xMi0wMlQxMzoyMToyMSswNzowMCIsImlkIjoiNjI4NTIxMzkyMTMzMSIsIm5iZiI6IjIwMjMtMTItMDJUMTM6MjE6MjErMDc6MDAiff86vwGkq4LVsLom36Zi_4JEP7SuR-DCsFYctcuZaEr8y6VMUOoml9nf77KNtdv2C5t2zGc-1BWK9GXTPmvAaQg
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /wilayah-provinsi/getnama:
-    post:
-      tags:
-        - General
-      summary: 'POST /wilayah-provinsi/getnama '
-      requestBody:
-        content: {}
-      responses:
-        '200':
-          description: Successful response
-          content:
-            application/json: {}
-  /wilayah-provinsi/get:
+  /biodata/jalur/get/id:
     get:
       tags:
         - General
-      summary: 'GET /wilayah-provinsi/get '
+      summary: Get One Biodata Jalur
+      parameters:
+        - name: LOGIN
+          in: header
+          schema:
+            type: string
+          example: >-
+            v4.public.eyJkYXRhIjp7ImlkX3BlbmRhZnRhciI6ODMsImlkX2Jpb2RhdGEiOiJjbGs2djB0a2VlOHRlYjkxbDYzMCIsInBob25lX251bWJlciI6IjA4MTIyMjIxODE0MyIsImVtYWlsIjoiaW5kcmFhamFAdWxiaS5hYy5pZCIsImZ1bGxfbmFtZSI6IkluZHJhIFV5In0sImV4cCI6IjIwMjMtMTItMDFUMTY6MjQ6MzQrMDc6MDAiLCJpYXQiOiIyMDIzLTEyLTAxVDE0OjI0OjM0KzA3OjAwIiwiaWQiOiIwODEyMjIyMTgxNDMiLCJuYmYiOiIyMDIzLTEyLTAxVDE0OjI0OjM0KzA3OjAwIn3fiNgTnQUZw2mUuU0EZOwIU7cMWrZG37MPzHqeFm3fFyRKRG7llbneSJiCfCI9xkYtpOvDTj5LN9EkrlD3_JgO
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clk729lkee8teb91l64g
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /sekolah:
+  /biodata/jalur:
     post:
       tags:
         - General
-      summary: 'POST /sekolah '
+      summary: Post Biodata Jalur
       requestBody:
-        content: {}
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_jalur: 2
+                tahun_lulus: 2023
+                kode_ref: YEYEYE
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /pendaftar/login/email:
-    post:
+    get:
       tags:
         - General
-      summary: POST /pendaftar/login/email successfully
-      requestBody:
-        content: {}
+      summary: Get data  biodata jalur by token
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /pendaftar/decrypt:
-    post:
+  /biodata/prodi/get:
+    get:
       tags:
         - General
-      summary: 'POST /pendaftar/decrypt '
-      requestBody:
-        content: {}
+      summary: Get All Biodata Prodi
       responses:
         '200':
           description: Successful response
           content:
             application/json: {}
-  /pendaftar/daftar:
+  /biodata/prodi/get/id:
+    get:
+      tags:
+        - General
+      summary: Get One Biodata Prodi
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clk5he9u843pfik9krq0
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/prodi:
     post:
       tags:
         - General
-      summary: 'POST /pendaftar/daftar '
+      summary: Post Biodata Prodi
       requestBody:
-        content: {}
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_fakultas: 1
+                prodi1: 14
+                prodi2: 34
+      parameters:
+        - name: login
+          in: header
+          schema:
+            type: string
+          example: >-
+            v4.public.eyJkYXRhIjp7ImlkX3BlbmRhZnRhciI6MTEzLCJpZF9iaW9kYXRhIjoiIiwicGhvbmVfbnVtYmVyIjoiMDgxMjIyMjE4MTQzIiwiZW1haWwiOiJpbmRyYWFqYUB1bGJpLmFjLmlkIiwiZnVsbF9uYW1lIjoiSW5kcmEgVXkifSwiZXhwIjoiMjAyMy0xMi0wMlQyMToyOToyNiswNzowMCIsImlhdCI6IjIwMjMtMTItMDJUMTk6Mjk6MjYrMDc6MDAiLCJpZCI6IjA4MTIyMjIxODE0MyIsIm5iZiI6IjIwMjMtMTItMDJUMTk6Mjk6MjYrMDc6MDAifZVm3qI5IXwME6m51v8p_zZmKh-FAFX89fA66peUkPab2r2_3TQo-j3xhZOsfFtRoHYCa2Yj3Qj6v_fuNYp6rQc
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/data_diri/get:
+    get:
+      tags:
+        - General
+      summary: Get All Biodata Diri
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/data_diri/get/id:
+    get:
+      tags:
+        - General
+      summary: Get One Biodata Diri
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clk2fki69kv2v70taud0
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/data_diri:
+    post:
+      tags:
+        - General
+      summary: Post Biodata Data Diri
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                jenis_kelamin: a
+                nik: '12314'
+                tanggal_lahir: '2023-09-09'
+                tempat_lahir: bandung
+                agama: islam
+                alamat: dimana aja
+                provinsi: jawa barat
+                kota: bandung
+                kecamatan: sarijadi
+                kelurahan: sariasih
+                kode_pos: '40151'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/data_ortu:
+    post:
+      tags:
+        - General
+      summary: Post Biodata Data Ortu
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_ayah_kandung: Babeh
+                hp_ayah_kandung: '08123456789'
+                nama_ibu_kandung: Indung
+                hp_ibu_kandung: '08123456333'
+                pekerjaan_orang_tua_wali: pekerjaan
+                alamat_orang_tua_wali: bdg
+                penghasilan_orang_tua_wali: '1000000'
+                sumber_dana: mencuri
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/data_sekolah:
+    post:
+      tags:
+        - General
+      summary: Post Biodata Data Sekolah
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nisn: '12312312'
+                asal_jurusan: '08123456789'
+                asal_sekolah: Bandung
+                alamat_sekolah: Sarijadi
+                provinsi_sekolah: jawa barat
+                kota_sekolah: bandung
+                kode_pos_sekolah: '904001'
+                jenis_sekolah: SMA
+                jurusan: IPA
+                akreditasi_sekolah: A
+                tahun_lulus: 2004
+                guru_bk: Nama BK
+                hp_guru_bk: '0981381283122'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /pendaftar/pendaftar/registered:
+    get:
+      tags:
+        - General
+      summary: Get check is registered
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /pendaftar/pendaftar/token:
+    get:
+      tags:
+        - General
+      summary: Get data by token
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /files/upload:
+    post:
+      tags:
+        - General
+      summary: Upload File
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+    get:
+      tags:
+        - General
+      summary: Upload File
+      parameters:
+        - name: id_file
+          in: query
+          schema:
+            type: string
+          example: 656d8def0516057583942c5d
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /va/create:
+    post:
+      tags:
+        - General
+      summary: Create VA
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              properties:
+                file:
+                  type: string
+                  format: binary
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /agama:
+    get:
+      tags:
+        - General
+      summary: Get All Agama
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /agama/get:
+    get:
+      tags:
+        - General
+      summary: Get One Agama
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '11'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /agama/post:
+    post:
+      tags:
+        - General
+      summary: Post Agama
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                agama: Atheis
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /agama/put:
+    put:
+      tags:
+        - General
+      summary: PutAgama
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                agama: Atheiszzz
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '8'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /agama/delete:
+    delete:
+      tags:
+        - General
+      summary: Delete Agama
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '8'
       responses:
         '200':
           description: Successful response
