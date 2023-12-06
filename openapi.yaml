@@ -1093,3 +1093,268 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /pekerjaan:
+    get:
+      tags:
+        - General
+      summary: Get All Pekerjaan
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /pekerjaan/get:
+    get:
+      tags:
+        - General
+      summary: Get One Pekerjaan
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '99'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /pekerjaan/post:
+    post:
+      tags:
+        - General
+      summary: Post Pekerjaan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_pekerjaan: tes pekerjaan
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /pekerjaan/put:
+    put:
+      tags:
+        - General
+      summary: Put Pekerjaan
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_pekerjaan: tes pekerjaan update
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '101'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /pekerjaan/delete:
+    delete:
+      tags:
+        - General
+      summary: Delete Pekerjaan
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '101'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jenis_sekolah:
+    get:
+      tags:
+        - General
+      summary: Get All Jenis Sekolah
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jenis_sekolah/get:
+    get:
+      tags:
+        - General
+      summary: Get One Jenis Sekolah
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '1'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jenis_sekolah/post:
+    post:
+      tags:
+        - General
+      summary: Post Jenis Sekolah
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_jenis_sekolah: tes jns sekolah
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jenis_sekolah/put:
+    put:
+      tags:
+        - General
+      summary: Put Jenis Sekolah
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_jenis_sekolah: tes jns sekolah tesssssssssss
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '5'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jenis_sekolah/delete:
+    delete:
+      tags:
+        - General
+      summary: Delete Jenis Sekolah
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '5'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jurusan_sekolah:
+    get:
+      tags:
+        - General
+      summary: Get All Jurusan Sekolah
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jurusan_sekolah/get:
+    get:
+      tags:
+        - General
+      summary: Get One Jurusan Sekolah
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '119'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jurusan_sekolah/getidjnssekolah:
+    post:
+      tags:
+        - General
+      summary: Get Jurusan By Id Jenis Sekolah
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_jenis_sekolah: '2'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jurusan_sekolah/post:
+    post:
+      tags:
+        - General
+      summary: Post Jurusan Sekolah
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_jenis_sekolah: 1
+                nama_jurusan: isi jurusan
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jurusan_sekolah/put:
+    put:
+      tags:
+        - General
+      summary: Put Jurusan Sekolah
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_jenis_sekolah: 3
+                nama_jurusan: isi jurusan update
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '119'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /jurusan_sekolah/delete:
+    delete:
+      tags:
+        - General
+      summary: Delete Jurusan Sekolah
+      parameters:
+        - name: id
+          in: query
+          schema:
+            type: integer
+          example: '119'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
