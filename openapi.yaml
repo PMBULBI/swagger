@@ -8,8 +8,9 @@ servers:
 components:
   securitySchemes:
     apikeyAuth:
-      type: http
-      scheme: apikey
+      type: apiKey
+      in: header
+      name: LOGIN
 security:
   - apikeyAuth: []
 paths:
@@ -375,7 +376,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-  /admin/get:
+  /get:
     get:
       tags:
         - General
@@ -418,7 +419,7 @@ paths:
     put:
       tags:
         - General
-      summary: Post Admin Copy
+      summary: Put Admin
       requestBody:
         content:
           application/json:
@@ -509,7 +510,7 @@ paths:
     put:
       tags:
         - General
-      summary: Post Jalur Copy
+      summary: Put Jalur
       requestBody:
         content:
           application/json:
@@ -519,6 +520,8 @@ paths:
                 nama_jalur: kiwkiw123xe
                 keterangan_jalur: Kiwkiwee
                 status: nonaktif
+      security:
+        - apikeyAuth: []
       parameters:
         - name: id
           in: query
@@ -713,6 +716,22 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /biodata/master/get:
+    get:
+      tags:
+        - General
+      summary: Get One Biodata Master
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clokofpu843igu4p8adg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /biodata/jalur/get:
     get:
       tags:
@@ -780,6 +799,31 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /biodata/jalur/put:
+    put:
+      tags:
+        - General
+      summary: Update Biodata Jalur
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_jalur: 2
+                tahun_lulus: 2022
+                kode_ref: AKUKETJE
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clmt2uhu843rbg9hp6dg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /biodata/prodi/get:
     get:
       tags:
@@ -832,6 +876,37 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /biodata/prodi/put:
+    put:
+      tags:
+        - General
+      summary: Post Biodata Prodi Copy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                id_fakultas: 1
+                prodi1: 34
+                prodi2: 54
+      parameters:
+        - name: login
+          in: header
+          schema:
+            type: string
+          example: >-
+            v4.public.eyJkYXRhIjp7ImlkX3BlbmRhZnRhciI6MTEzLCJpZF9iaW9kYXRhIjoiIiwicGhvbmVfbnVtYmVyIjoiMDgxMjIyMjE4MTQzIiwiZW1haWwiOiJpbmRyYWFqYUB1bGJpLmFjLmlkIiwiZnVsbF9uYW1lIjoiSW5kcmEgVXkifSwiZXhwIjoiMjAyMy0xMi0wMlQyMToyOToyNiswNzowMCIsImlhdCI6IjIwMjMtMTItMDJUMTk6Mjk6MjYrMDc6MDAiLCJpZCI6IjA4MTIyMjIxODE0MyIsIm5iZiI6IjIwMjMtMTItMDJUMTk6Mjk6MjYrMDc6MDAifZVm3qI5IXwME6m51v8p_zZmKh-FAFX89fA66peUkPab2r2_3TQo-j3xhZOsfFtRoHYCa2Yj3Qj6v_fuNYp6rQc
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clmt4rhu843rb6k7kh70
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /biodata/data_diri/get:
     get:
       tags:
@@ -852,7 +927,7 @@ paths:
           in: query
           schema:
             type: string
-          example: clk2fki69kv2v70taud0
+          example: clokp89u843ig5e7tra0
       responses:
         '200':
           description: Successful response
@@ -885,6 +960,39 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /biodata/data_diri/put:
+    put:
+      tags:
+        - General
+      summary: Update Biodata Data Diri
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                jenis_kelamin: Non Binary
+                nik: '12314'
+                tanggal_lahir: '2023-09-09'
+                tempat_lahir: bandung
+                agama: islam
+                alamat: dimana aja
+                provinsi: jawa barat
+                kota: bandung
+                kecamatan: sarijadi
+                kelurahan: sariasih
+                kode_pos: '40151'
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clk1uoa69kv2186kj650
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
   /biodata/data_ortu:
     post:
       tags:
@@ -904,6 +1012,52 @@ paths:
                 alamat_orang_tua_wali: bdg
                 penghasilan_orang_tua_wali: '1000000'
                 sumber_dana: mencuri
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/data_ortu/put:
+    put:
+      tags:
+        - General
+      summary: Update Biodata Data Ortu
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nama_ayah_kandung: Babehee
+                hp_ayah_kandung: '08123456789'
+                nama_ibu_kandung: Indungee
+                hp_ibu_kandung: '08123456333'
+                pekerjaan_orang_tua_wali: pekerjaan
+                alamat_orang_tua_wali: bdg
+                penghasilan_orang_tua_wali: '1000000'
+                sumber_dana: mencuri
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clk2gsa69kv2v70taueg
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/data_ortu/get/id:
+    get:
+      tags:
+        - General
+      summary: Get One Biodata Sekolah Copy
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clokpfpu843igrnh80pg
       responses:
         '200':
           description: Successful response
@@ -933,6 +1087,73 @@ paths:
                 tahun_lulus: 2004
                 guru_bk: Nama BK
                 hp_guru_bk: '0981381283122'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/data_sekolah/put:
+    put:
+      tags:
+        - General
+      summary: Post Biodata Data Sekolah Copy
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                nisn: '12312312'
+                asal_jurusan: '08123456789'
+                asal_sekolah: Bandung
+                alamat_sekolah: Sarijadi
+                provinsi_sekolah: jawa barat
+                kota_sekolah: bandung
+                kode_pos_sekolah: '904001'
+                jenis_sekolah: SMA
+                jurusan: IPA
+                akreditasi_sekolah: A
+                tahun_lulus: 2004
+                guru_bk: Nama BK
+                hp_guru_bk: '0981381283122'
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clk4qri69kv1v227d6n0
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/data_sekolah/get/id:
+    get:
+      tags:
+        - General
+      summary: Get One Biodata Sekolah
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clokpohu843ig5e7trag
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /biodata/berkas/get/id:
+    get:
+      tags:
+        - General
+      summary: Get One Biodata Berkas
+      parameters:
+        - name: id_hash
+          in: query
+          schema:
+            type: string
+          example: clokpohu843ig5e7trag
       responses:
         '200':
           description: Successful response
@@ -1353,6 +1574,44 @@ paths:
           schema:
             type: integer
           example: '119'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /isadmin:
+    get:
+      tags:
+        - General
+      summary: Is Admin
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /admin/login:
+    post:
+      tags:
+        - General
+      summary: Login Admin
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                email: bachtiarramadhan26@gmail.com
+                password: '211200'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
+  /tahun_lulusan:
+    get:
+      tags:
+        - General
+      summary: Get All Tahun Lulusan
       responses:
         '200':
           description: Successful response
