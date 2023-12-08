@@ -1617,3 +1617,20 @@ paths:
           description: Successful response
           content:
             application/json: {}
+  /jalurprodi:
+    post:
+      tags:
+        - General
+      summary: Get Jalur By Prodi
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                jalur: ikd
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
