@@ -1634,7 +1634,7 @@ paths:
           description: Successful response
           content:
             application/json: {}
-            /jalurtahun:
+  /jalurtahun:
     post:
       tags:
         - General
