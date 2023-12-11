@@ -1634,3 +1634,27 @@ paths:
           description: Successful response
           content:
             application/json: {}
+            /jalurtahun:
+    post:
+      tags:
+        - General
+      summary: Get Jalur By Tahun
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              example:
+                tahun: 2024
+      parameters:
+        - name: login
+          in: header
+          schema:
+            type: string
+          example: >-
+            v4.public.eyJkYXRhIjp7ImlkX3BlbmRhZnRhciI6MzQsImlkX2Jpb2RhdGEiOiJjbHI3cTFodTg0M21vYTJuNGwwMCIsInBob25lX251bWJlciI6IjYyODUyMTc2MjUzMjUiLCJlbWFpbCI6InJhbmVyejk3QGdtYWlsLmNvbSIsImZ1bGxfbmFtZSI6IkJhY3RpYXIgUmFtYWRoYW4ifSwiZXhwIjoiMjAyMy0xMi0xMlQwODo0Nzo0MSswNzowMCIsImlhdCI6IjIwMjMtMTItMTFUMTQ6NDc6NDErMDc6MDAiLCJpZCI6IjYyODUyMTc2MjUzMjUiLCJuYmYiOiIyMDIzLTEyLTExVDE0OjQ3OjQxKzA3OjAwIn2kiiwCs5KGYVtkePvtkonh_cY07-gR1dmF_6RgeD2EhEg0-PIXb9uJn3bCuQK_RJNGGf6X0u0Vo-0ZgI6oA_8C
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json: {}
